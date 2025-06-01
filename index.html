@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doa Harian - Panduan Spiritual Harian</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+      }
+
+      .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .menu-toggle {
+        display: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Hero Section */
+      .hero {
+        margin-top: 80px;
+        padding: 4rem 0;
+        text-align: center;
+        color: white;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        animation: fadeInUp 1s ease 0.2s both;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(45deg, #ff6b6b, #ee5a6f);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(238, 90, 111, 0.3);
+        animation: fadeInUp 1s ease 0.4s both;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(238, 90, 111, 0.4);
+      }
+
+      /* Main Content */
+      .main-content {
+        background: white;
+        margin: 2rem 0;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Filter Section */
+      .filter-section {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        padding: 2rem;
+        color: white;
+      }
+
+      .filter-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      .filter-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: white;
+        color: #f5576c;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Prayer Cards */
+      .prayers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      .prayer-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 5px solid #667eea;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .prayer-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+      }
+
+      .prayer-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .prayer-icon {
+        font-size: 2.5rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+      }
+
+      .prayer-title {
+        font-size: 1.3rem;
+        color: #333;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .prayer-time {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 0.3rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-bottom: 1rem;
+      }
+
+      .prayer-arabic {
+        font-size: 1.4rem;
+        text-align: right;
+        line-height: 2;
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f8f9ff, #e8f0ff);
+        border-radius: 10px;
+        border-right: 4px solid #667eea;
+        font-family: "Times New Roman", serif;
+      }
+
+      .prayer-latin {
+        font-style: italic;
+        color: #666;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+
+      .prayer-meaning {
+        color: #444;
+        line-height: 1.8;
+        padding: 1rem;
+        background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+        border-radius: 8px;
+        border-left: 4px solid #ff6b6b;
+      }
+
+      /* Search */
+      .search-container {
+        position: relative;
+        max-width: 500px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+      }
+
+      .search-box {
+        width: 100%;
+        padding: 1rem 1rem 1rem 3rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        background: white;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 3rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      /* Scroll to top button */
+      .scroll-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .scroll-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .scroll-top:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          flex-direction: column;
+          padding: 1rem;
+          border-radius: 0 0 15px 15px;
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .nav-links a {
+          color: #333;
+          padding: 1rem;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .prayers-grid {
+          grid-template-columns: 1fr;
+          padding: 1rem;
+        }
+
+        .prayer-card {
+          padding: 1.5rem;
+        }
+
+        .search-container {
+          padding: 0 1rem;
+        }
+      }
+
+      /* Dark mode styles */
+      .dark-mode {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      }
+
+      .dark-mode .main-content {
+        background: #2d3748;
+      }
+
+      .dark-mode .prayer-card {
+        background: #4a5568;
+        color: white;
+      }
+
+      .theme-toggle {
+        background: none;
+        border: 2px solid white;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .theme-toggle:hover {
+        background: white;
+        color: #333;
+      }
+
+      footer {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="container">
+        <div class="logo"><i class="fas fa-mosque"></i> Doa Harian</div>
+        <ul class="nav-links" id="navLinks">
+          <li>
+            <a
+              href="#home"
+              onclick="filterPrayers('all'); scrollToSection('home')"
+              >Beranda</a
+            >
+          </li>
+          <li>
+            <a href="#prayers" onclick="scrollToSection('prayers')">Doa-doa</a>
+          </li>
+          <li>
+            <a
+              href="#prayers"
+              onclick="filterPrayers('favorites'); scrollToSection('prayers')"
+              >Favorit</a
+            >
+          </li>
+          <li>
+            <a href="#about" onclick="scrollToSection('about')">Tentang</a>
+          </li>
+        </ul>
+        <button class="theme-toggle" onclick="toggleTheme()">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="menu-toggle" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </header>
+
+    <section id="home" class="hero">
+      <div class="container">
+        <h1><i class="fas fa-star-and-crescent"></i> Doa Harian</h1>
+        <p>
+          Panduan lengkap doa-doa harian untuk meningkatkan spiritualitas Anda
+        </p>
+        <a
+          href="#prayers"
+          class="cta-button"
+          onclick="scrollToSection('prayers')"
+        >
+          <i class="fas fa-book-open"></i> Mulai Berdoa
+        </a>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input
+          type="text"
+          class="search-box"
+          placeholder="Cari doa..."
+          id="searchInput"
+          oninput="searchPrayers()"
+        />
+      </div>
+
+      <div class="main-content">
+        <div class="filter-section">
+          <h2 class="filter-title">
+            <i class="fas fa-filter"></i> Kategori Doa
+          </h2>
+          <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterPrayers('all')">
+              <i class="fas fa-list"></i> Semua
+            </button>
+            <button class="filter-btn" onclick="filterPrayers('daily')">
+              <i class="fas fa-sun"></i> Harian
+            </button>
+            <button class="filter-btn" onclick="filterPrayers('eating')">
+              <i class="fas fa-utensils"></i> Makan
+            </button>
+            <button class="filter-btn" onclick="filterPrayers('travel')">
+              <i class="fas fa-car"></i> Perjalanan
+            </button>
+            <button class="filter-btn" onclick="filterPrayers('sleep')">
+              <i class="fas fa-bed"></i> Tidur
+            </button>
+            <button class="filter-btn" onclick="filterPrayers('prayer')">
+              <i class="fas fa-mosque"></i> Sholat
+            </button>
+            <button class="filter-btn" onclick="filterPrayers('protection')">
+              <i class="fas fa-shield-alt"></i> Perlindungan
+            </button>
+          </div>
+        </div>
+
+        <div id="prayers" class="prayers-grid">
+          <!-- Prayer cards will be dynamically generated -->
+        </div>
+      </div>
+    </div>
+
+    <button class="scroll-top" onclick="scrollToTop()" id="scrollTopBtn">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer>
+      &copy; 2025 Muhammad Rifqi Thoohaa Anas. All rights reserved.
+    </footer>
+
+    <script>
+      // Prayer data
+      const prayers = [
+        {
+          id: 1,
+          category: "daily",
+          title: "Doa Bangun Tidur",
+          time: "Pagi Hari",
+          arabic:
+            "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+          latin:
+            "Alhamdulillahil-ladzii ahyaanaa ba'da maa amaatanaa wa ilaihin-nusyuur",
+          meaning:
+            "Segala puji bagi Allah yang telah menghidupkan kami sesudah kami mati (tidur) dan kepada-Nya kami akan dibangkitkan.",
+        },
+        {
+          id: 2,
+          category: "eating",
+          title: "Doa Sebelum Makan",
+          time: "Sebelum Makan",
+          arabic:
+            "اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ",
+          latin:
+            "Allaahumma baarik lanaa fiimaa rozaqtanaa wa qinaa 'adzaaban-naar",
+          meaning:
+            "Ya Allah, berkahilah kami dalam rezeki yang Engkau berikan kepada kami dan peliharalah kami dari siksa neraka.",
+        },
+        {
+          id: 3,
+          category: "eating",
+          title: "Doa Sesudah Makan",
+          time: "Sesudah Makan",
+          arabic:
+            "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
+          latin:
+            "Alhamdulillahil-ladzii ath'amanaa wa saqaanaa wa ja'alanaa muslimiin",
+          meaning:
+            "Segala puji bagi Allah yang telah memberi kami makan dan minum serta menjadikan kami orang-orang muslim.",
+        },
+        {
+          id: 4,
+          category: "travel",
+          title: "Doa Naik Kendaraan",
+          time: "Saat Bepergian",
+          arabic:
+            "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
+          latin:
+            "Subhaanalladzi sakhkhara lanaa haadzaa wa maa kunnaa lahu muqriniin wa innaa ilaa rabbinaa lamunqalibuum",
+          meaning:
+            "Maha Suci Allah yang telah menundukkan semua ini bagi kami padahal kami sebelumnya tidak mampu menguasainya, dan sesungguhnya kami akan kembali kepada Tuhan kami.",
+        },
+        {
+          id: 5,
+          category: "sleep",
+          title: "Doa Sebelum Tidur",
+          time: "Malam Hari",
+          arabic: "اللَّهُمَّ بِاسْمِكَ أَمُوتُ وَأَحْيَا",
+          latin: "Allaahumma bismika amuutu wa ahyaa",
+          meaning: "Ya Allah, dengan nama-Mu aku mati dan aku hidup.",
+        },
+        {
+          id: 6,
+          category: "protection",
+          title: "Doa Masuk Rumah",
+          time: "Masuk Rumah",
+          arabic:
+            "اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ الْمَوْلِجِ وَخَيْرَ الْمَخْرَجِ بِسْمِ اللَّهِ وَلَجْنَا وَبِسْمِ اللَّهِ خَرَجْنَا وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا",
+          latin:
+            "Allaahumma innii as-aluka khoiral mauliji wa khoiral mokhroji bismillaahi walajna wa bismillaahi khorojna wa 'alallahi robbina tawakkalna",
+          meaning:
+            "Ya Allah, sesungguhnya aku mohon kepada-Mu kebaikan tempat masuk dan kebaikan tempat keluar. Dengan nama Allah kami masuk, dan dengan nama Allah kami keluar, dan kepada Allah Tuhan kami, kami bertawakkal.",
+        },
+        {
+          id: 7,
+          category: "daily",
+          title: "Doa Keluar Rumah",
+          time: "Keluar Rumah",
+          arabic:
+            "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ",
+          latin:
+            "Bismillaahi tawakkaltu 'alallahi laa haula wa laa quwwata illaa billaah",
+          meaning:
+            "Dengan nama Allah, aku bertawakkal kepada Allah. Tiada daya dan kekuatan kecuali dengan pertolongan Allah.",
+        },
+        {
+          id: 8,
+          category: "protection",
+          title: "Doa Masuk Kamar Mandi",
+          time: "Masuk Kamar Mandi",
+          arabic:
+            "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبْثِ وَالْخَبَائِثِ",
+          latin: "Allaahumma innii a'uudzu bika minal khubutsi wal khobaaitsi",
+          meaning:
+            "Ya Allah, sesungguhnya aku berlindung kepada-Mu dari godaan setan laki-laki dan setan perempuan.",
+        },
+        {
+          id: 9,
+          category: "daily",
+          title: "Doa Beraktivitas Lancar",
+          time: "Sebelum Beraktivitas",
+          arabic:
+            "رَبَّنَا آتِنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا رَبِّ اشْرَحْ لِي صَدْرِي، وَيَسِّرْ لِي أَمْرِي",
+          latin:
+            "Rabbana atina min ladunka rahmatan, wa hayyi lana min amrina rasyadan, rabbisyrah li shadri, wa yassir li amri.",
+          meaning:
+            "Wahai Tuhan kami, berikanlah rahmat kepada kami dari sisi-Mu dan sempurnakanlah bagi kamu petunjuk yang lurus dalam urusan kami ini. Ya Tuhanku. lapangkanlah untukku dadaku, dan mudahkanlah untukku urusanku.",
+        },
+        {
+          id: 10,
+          category: "prayer",
+          title: "Doa Sebelum Wudhu",
+          time: "Sebelum Wudhu",
+          arabic:
+            "نَوَيْتُ الْوُضُوْءَ لِرَفْعِ الْحَدَثِ اْلاَصْغَرِ فَرْضًاِللهِ تَعَالَى",
+          latin:
+            "Nawaitul wudua lirofil hadatsii ashghori fardhon lillaahi taalaa.",
+          meaning:
+            "Aku niat berwudu untuk menghilangkan hadas kecil, fardu karena Allah.",
+        },
+        {
+          id: 11,
+          category: "prayer",
+          title: "Doa Setelah Wudhu",
+          time: "Setelah Wudhu",
+          arabic:
+            "أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ. اللَّهُمَّ اجْعَلْنِى مِنَالتَّوَّابِينَ وَاجْعَلْنِى مِنَ الْمُتَطَهِّرِينَ",
+          latin:
+            "Asyhadu allaa ilaaha illallah wahdahu laa syariikalahu. Wa asyhadu anna Muhammadanabduhu wa rasuuluhu. Allahumma-j alnii minattabinna waj alnii minal mutathohiirina waj alnii min ibadatishalihin.",
+          meaning:
+            "Aku bersaksi tiada Tuhan melainkan Allah dan tidak ada yang menyekutukan bagi-Nya. Dan aku bersaksi bahwa Nabi Muhammad adalah hamba-Nya dan utusan-Nya. Ya Allah jadikanlah aku orang yang ahli taubat dan jadikanlah aku orang yang suci dan jadikanlah aku dari golongan orang-orang yang saleh",
+        },
+        {
+          id: 12,
+          category: "prayer",
+          title: "Doa Masuk Masjid",
+          time: "Masuk Masjid",
+          arabic:
+            "اَللَّهُمَّ اغْفِرْ لِي ذُنُوْبِي وَافْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+          latin: "Allahummaghfirli dzunubi waftahli abwaba rahmatik.",
+          meaning:
+            "Wahai Tuhanku, ampuni untukku segala dosaku. Buka lah bagiku segala pintu rahmat-Mu.",
+        },
+        {
+          id: 13,
+          category: "prayer",
+          title: "Doa Keluar Masjid",
+          time: "Keluar Masjid",
+          arabic:
+            "اَللَّهُمَّ اغْفِرْ لِي ذُنُوْبِي وَافْتَحْ لِي أَبْوَابَ فَضْلِكَ",
+          latin: "Allahummaghfirli dzunubi waftahli abwaba fadhlik.",
+          meaning:
+            "Wahai Tuhanku, ampuni untukku segala dosaku. Buka lah bagiku segala pintu kemurahan-Mu.",
+        },
+        {
+          id: 14,
+          category: "prayer",
+          title: "Doa Setelah Adzan",
+          time: "Setelah Azan",
+          arabic:
+            "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ وَالصَّلَاةِ الْقَائِمَةِ آتِ مُحَمَّدًا الْوَسِيْلَةَ وَالْفَضِيلَةَ وَابْعَثْهُ مَقَامًا مَحْمُوْدًا الَّذِي وَعَدْتَهُ، حَلَّتْ لَهُ شَفَاعَتِي يَوْمَ الْقِيَامَةِ",
+          latin:
+            "Allahumma rabba hadzihi ad-da’wati at-taammati wash sholaatil qaa’imati aati muhammadan al-wasiilata wal fadhiilata wab’atshu maqaaman mahmuudan alladzi wa’adtah.",
+          meaning:
+            "Ya Allah, pemilik seruan yang sempurna ini, dan shalat yang akan didirikan, berilah Muhammad wasilah dan keutamaan, dan bangkitkan untuknya kedudukan terpuji yang Engkau janjikan.",
+        },
+      ];
+
+      let currentFilter = "all";
+      let favoritesPrayers =
+        JSON.parse(localStorage.getItem("favoritesPrayers")) || [];
+
+      // Initialize the app
+      document.addEventListener("DOMContentLoaded", function () {
+        renderPrayers();
+        setupScrollButton();
+
+        // Auto scroll to home on page load
+        setTimeout(() => {
+          scrollToSection("home");
+        }, 500);
+      });
+
+      // Render prayers
+      function renderPrayers(prayersToRender = prayers) {
+        const prayersGrid = document.getElementById("prayers");
+        prayersGrid.innerHTML = "";
+
+        if (prayersToRender.length === 0) {
+          prayersGrid.innerHTML = `
+      <div style="text-align:center; padding:2rem; color:#666;">
+        <i class="fas fa-heart-broken" style="font-size:2rem; color:#ff6b6b;"></i>
+        <p>Tidak ada doa favorit 😢</p>
+      </div>
+    `;
+          return;
+        }
+
+        prayersToRender.forEach((prayer, index) => {
+          const isFavorite = favoritesPrayers.includes(prayer.id);
+          const card = document.createElement("div");
+          card.className = "prayer-card fade-in";
+          card.style.animationDelay = `${index * 0.1}s`;
+
+          card.innerHTML = `
+                    <div class="prayer-icon">
+                        <i class="${prayer.icon}"></i>
+                    </div>
+                    <h3 class="prayer-title">${prayer.title}</h3>
+                    <span class="prayer-time">
+                        <i class="fas fa-clock"></i> ${prayer.time}
+                    </span>
+                    <div class="prayer-arabic">${prayer.arabic}</div>
+                    <div class="prayer-latin">${prayer.latin}</div>
+                    <div class="prayer-meaning">${prayer.meaning}</div>
+                    <button onclick="toggleFavorite(${
+                      prayer.id
+                    })" style="background: ${
+            isFavorite ? "#ff6b6b" : "#667eea"
+          }; color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; margin-top: 1rem; transition: all 0.3s ease;">
+                        <i class="fas fa-heart"></i> ${
+                          isFavorite
+                            ? "Hapus dari Favorit"
+                            : "Tambah ke Favorit"
+                        }
+                    </button>
+                `;
+
+          prayersGrid.appendChild(card);
+        });
+      }
+
+      // Filter prayers
+      function filterPrayers(category) {
+        currentFilter = category;
+
+        // Update active button
+        document.querySelectorAll(".filter-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        event.target.classList.add("active");
+
+        // Filter and render
+        let filteredPrayers;
+        if (category === "all") {
+          filteredPrayers = prayers;
+        } else if (category === "favorites") {
+          filteredPrayers = prayers.filter((prayer) =>
+            favoritesPrayers.includes(prayer.id)
+          );
+        } else {
+          filteredPrayers = prayers.filter(
+            (prayer) => prayer.category === category
+          );
+        }
+
+        renderPrayers(filteredPrayers);
+      }
+
+      // Search prayers
+      function searchPrayers() {
+        const searchTerm = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const filteredPrayers = prayers.filter((prayer) =>
+          prayer.title.toLowerCase().includes(searchTerm)
+        );
+        renderPrayers(filteredPrayers);
+      }
+
+      // Toggle favorites
+      function toggleFavorite(prayerId) {
+        const index = favoritesPrayers.indexOf(prayerId);
+        if (index > -1) {
+          favoritesPrayers.splice(index, 1);
+        } else {
+          favoritesPrayers.push(prayerId);
+        }
+
+        localStorage.setItem(
+          "favoritesPrayers",
+          JSON.stringify(favoritesPrayers)
+        );
+
+        // Re-render if we're on favorites view
+        if (currentFilter === "favorites") {
+          filterPrayers("favorites");
+        } else {
+          renderPrayers();
+        }
+      }
+
+      // Navigation functions
+      function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }
+
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function toggleMenu() {
+        const navLinks = document.getElementById("navLinks");
+        navLinks.classList.toggle("active");
+      }
+
+      function toggleTheme() {
+        document.body.classList.toggle("dark-mode");
+        const themeIcon = document.querySelector(".theme-toggle i");
+        if (document.body.classList.contains("dark-mode")) {
+          themeIcon.className = "fas fa-sun";
+        } else {
+          themeIcon.className = "fas fa-moon";
+        }
+      }
+
+      // Setup scroll button
+      function setupScrollButton() {
+        const scrollBtn = document.getElementById("scrollTopBtn");
+
+        window.addEventListener("scroll", () => {
+          if (window.pageYOffset > 300) {
+            scrollBtn.classList.add("visible");
+          } else {
+            scrollBtn.classList.remove("visible");
+          }
+        });
+      }
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const navLinks = document.getElementById("navLinks");
+        const menuToggle = document.querySelector(".menu-toggle");
+
+        if (
+          !navLinks.contains(event.target) &&
+          !menuToggle.contains(event.target)
+        ) {
+          navLinks.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>
